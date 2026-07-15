@@ -12,7 +12,9 @@ import java.util.UUID;
 public interface CourseResultRepository extends JpaRepository<CourseResult, UUID> {
     //public CourseResult findById(UUID id);
 
-    public CourseResult findByName(String name);
+    default CourseResult findByName(String name){
+                return findAllByName(name).stream().findFirst().orElse(null);
+    }
 
 
     @Query("SELECT c FROM CourseResult c")
